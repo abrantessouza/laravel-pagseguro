@@ -348,6 +348,37 @@ if ($information) {
 }
 ```
 
+Também é possível utilizar essa api no Lumen, basta criar um helper para adicionar o método config_path()
+```php
+<?php
+
+if ( ! function_exists('config_path'))
+{
+    /**
+     * Get the configuration path.
+     *
+     * @param  string $path
+     * @return string
+     */
+    function config_path($path = '')
+    {
+        return app()->basePath() . '/config' . ($path ? '/' . $path : $path);
+    }
+}
+```
+
+Em seguida adicionamos o arquivo em files na chave autoload do  arquivo composer.json.
+
+```
+"autoload": {
+        ...
+        "files": [
+            "app/helper.php"
+        ]
+    },
+```    
+E pra finalizar, execute o comando composer dump-autoload. Case de problema, execute composer update.
+
 ## Licença
 
 O Laravel PagSeguro utiliza a licença MIT, para saber mais leia no link: [MIT license](http://opensource.org/licenses/MIT)
